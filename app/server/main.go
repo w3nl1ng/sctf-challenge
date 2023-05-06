@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+	"strconv"
+	"strings"
 
 	"database/sql"
 	"log"
@@ -15,6 +17,15 @@ import (
 // 	Name  string `json:"name"`
 // 	Phone string `json:"phone"`
 // }
+
+var addressBook map[int][]string
+
+func init() {
+	addressBook = make(map[int][]string)
+	addressBook[1000] = []string{"1001", "1002"}
+	addressBook[1001] = []string{"1002"}
+	addressBook[1002] = []string{"1000"}
+}
 
 func main() {
 	router := gin.Default()
@@ -116,5 +127,7 @@ func queryUserInfoByName(ctx *gin.Context) {
 }
 
 func showAddressBook(ctx *gin.Context) {
-	ctx.String(http.StatusOK, "this is your adress book")
+	userId, _ := strconv.Atoi(ctx.Query("userid"))
+	numbers := addressBook[userId]
+	ctx.String(http.StatusOK, strings.Join(numbers, ","))
 }
