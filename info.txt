@@ -1,0 +1,20 @@
+1000, "jack", "12345", "15426987456"  "827ccb0eea8a706c4c34a16891f84e7b"
+1001, "tom",  "8726t", "48569526587"  "3f86f0366e9e68b396c24a1ce6c358b7"
+1002, "rose", "ajuhs", "56215845698"  "800990edc77138a91af1c78bc9772ec0"
+1003, "alice","alojs", "58462515974"  "cb87564b2d38d733b9ce81c2723b8db9"
+1004, "bob",  "alijs", "45854569584"  "c2ec2d484690db77914a58edbbffc894"
+
+
+insert into users (id, name, password) values 
+(1000, "jack", "827ccb0eea8a706c4c34a16891f84e7b"),
+(1001, "tom",  "3f86f0366e9e68b396c24a1ce6c358b7"),
+(1002, "rose", "800990edc77138a91af1c78bc9772ec0"),
+(1003, "alice","cb87564b2d38d733b9ce81c2723b8db9"),
+(1004, "bob",  "c2ec2d484690db77914a58edbbffc894");
+
+insert into info (id, name, phone) values
+(1000, "jack", "15426987456"),
+(1001, "tom",  "48569526587"),
+(1002, "rose", "56215845698"),
+(1003, "alice","58462515974"),
+(1004, "bob",  "45854569584");

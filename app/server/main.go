@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"net/http"
 	"strconv"
 	"strings"
@@ -77,7 +79,11 @@ func checkLogin(userId, password string) bool {
 		log.Fatal(err)
 	}
 
-	if password == storedPwd {
+	//计算password的md5值
+	temp := md5.Sum([]byte(password))
+	md5Pwd := hex.EncodeToString(temp[:])
+
+	if md5Pwd == storedPwd {
 		return true
 	} else {
 		return false
