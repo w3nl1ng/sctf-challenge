@@ -118,11 +118,22 @@ func queryUserInfoByName(ctx *gin.Context) {
 
 		log.Print(userId, userName, userPhone)
 
-		ctx.JSON(http.StatusOK, gin.H{
-			"id":userId,
-			"name":userName,
-			"phone":userPhone,
-		})
+		extraMsg := "can you help me to find alice, the flag is sctf{md5(find-path)}, find-path's format is like tom->jack->alice"
+
+		if userName == "tom" {
+			ctx.JSON(http.StatusOK, gin.H{
+				"id":userId,
+				"name":userName,
+				"phone":userPhone,
+				"message":extraMsg,
+			})
+		} else {
+			ctx.JSON(http.StatusOK, gin.H{
+				"id":userId,
+				"name":userName,
+				"phone":userPhone,
+			})
+		}
 	}
 }
 
