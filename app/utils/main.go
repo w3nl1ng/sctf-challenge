@@ -40,3 +40,9 @@ func main() {
 		fmt.Println(md5Encode(val))
 	}
 }
+
+func genPassword() {
+	for i := 0; i < 100; i++ {
+		
+	}
+}

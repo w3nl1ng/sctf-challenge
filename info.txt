@@ -5,6 +5,8 @@
 1004, "bob",  "alijs", "45854569584"  "c2ec2d484690db77914a58edbbffc894"
 
 
+
+
 insert into users (id, name, password) values 
 (1000, "jack", "827ccb0eea8a706c4c34a16891f84e7b"),
 (1001, "tom",  "3f86f0366e9e68b396c24a1ce6c358b7"),

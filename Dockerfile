@@ -1,13 +1,11 @@
-FROM golang:latest AS builder
+FROM mysql:5.7.42-debian
 
-RUN mkdir /app
-ADD ./ /app
-WORKDIR /app
-ENV GOPROXY=https://goproxy.cn,direct
-ENV CGO_ENABLED=0 GOOS=linux
-RUN go build -o main ./app/server
+EXPOSE 3306
+ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
 
+RUN mkdir /mysql
 
-FROM alpine:latest AS production
-COPY --from=builder /app/main .
-CMD ["./main"]⏎ 
+COPY ./mysql/setup.sh /mysql/setup.sh 
+COPY ./mysql/create_db.sql /mysql/create_db.sql 
+
+CMD ["sh", "/mysql/setup.sh"]

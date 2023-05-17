@@ -61,7 +61,7 @@ func AuthMiddleware() gin.HandlerFunc {
 
 func checkLogin(userId, password string) bool {
 	//建立数据库连接
-	db, err := sql.Open("mysql", "root:yiqiu666...@tcp(127.0.0.1:3306)/sctf_db")
+	db, err := sql.Open("mysql", "sctf:123456@tcp(172.17.0.1:3307)/sctf_db")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -99,7 +99,7 @@ func queryUserInfoByName(ctx *gin.Context) {
 	}
 
 	//打开数据库连接
-	db, err := sql.Open("mysql", "root:yiqiu666...@tcp(127.0.0.1:3306)/sctf_db")
+	db, err := sql.Open("mysql", "sctf:123456@tcp(172.17.0.1:3307)/sctf_db")
 	if err != nil {
 		log.Fatal(err)
 	}
