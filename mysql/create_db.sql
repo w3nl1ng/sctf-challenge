@@ -119,7 +119,7 @@ insert into `info` (`id`, `name`, `phone`) values
 (49, "Evan", "17929447200");
 
 use mysql;
-GRANT ALL PRIVILEGES ON *.* TO 'sctf'@'%' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON *.* TO 'sctf'@'%' IDENTIFIED BY 'sctf2023recv!!!';
 SELECT host, user FROM user;
 
 flush privileges;
