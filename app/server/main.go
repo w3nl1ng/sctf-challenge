@@ -17,12 +17,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type userInfoResp struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Phone string `json:"phone"`
-	Msg   string `json:"message"`
-}
+
 
 var addressBook  = map[int][]string{
 	0: {"15501901520", "10289996646", "18439933215", "10191038147", "16190421735", "12143338624", },
@@ -186,6 +181,13 @@ func checkLogin(userId, password string) bool {
 	}
 }
 
+type userInfoResp struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Phone string `json:"phone"`
+	Msg   string `json:"message"`
+}
+
 func queryUserInfoByName(ctx *gin.Context) {
 	userName := ctx.Query("username")
 	if userName == "" {
@@ -221,22 +223,26 @@ func queryUserInfoByName(ctx *gin.Context) {
 
 		log.Print(userId, userName, userPhone)
 
-		extraMsg := "can you help me to find alice, the flag is sctf{md5(find-path)}, find-path's format is like tom->jack->alice"
+		extraMsg := "can you help me to contact Christopher, the flag is sctf{md5(find-path)}, find-path's format is like tom->jack->alice"
 
-		if userName == "tom" {
-			ctx.JSON(http.StatusOK, gin.H{
-				"id":userId,
-				"name":userName,
-				"phone":userPhone,
-				"message":extraMsg,
-			})
-		} else {
-			ctx.JSON(http.StatusOK, gin.H{
-				"id":userId,
-				"name":userName,
-				"phone":userPhone,
-			})
+		userInfo := userInfoResp{
+			ID: userId,
+			Name: userName,
+			Phone: userPhone,
 		}
+		if userId == 14 {
+			userInfo.Msg = extraMsg
+		}
+
+		userInfoJSON, err := json.Marshal(userInfo)
+		if err != nil {
+			log.Println(err)
+			ctx.String(http.StatusInternalServerError, "some internal error happend")
+			ctx.Abort()
+		}
+
+		cryptoResp := cryptoJSONByte(userInfoJSON)
+		ctx.Data(http.StatusOK, "application/octet-stream", cryptoResp)
 	}
 }
 
@@ -256,7 +262,7 @@ func showAddressBook(ctx *gin.Context) {
 	if err != nil {
 		log.Println(err)
 		ctx.String(http.StatusInternalServerError, "some internal error happend")
-		return
+		ctx.Abort()
 	}
 
 	cryptoData := cryptoJSONByte(respJSON)
