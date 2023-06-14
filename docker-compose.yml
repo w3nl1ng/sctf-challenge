@@ -1,0 +1,10 @@
+version: '1'
+services:
+  sctf-server:
+    build: ./server
+    ports:
+      - "8080:8080"
+  sctf-db:
+    build: ./mysql
+    ports:
+      - "3307:3306"

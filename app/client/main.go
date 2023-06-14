@@ -102,6 +102,7 @@ func main() {
 			handleAddrBookOK(body)
 		} else { //请求失败
 			fmt.Println(string(body))
+			// fmt.Println("hello")
 		}
 	}
 }
